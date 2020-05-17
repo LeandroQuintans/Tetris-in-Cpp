@@ -42,10 +42,15 @@ namespace tetris {
         ShapeName m_shapeName;
         RotationDeg m_currentRotation = RotationDeg::DEGREE_0;
         
+        // Changes m_currentRotation to the aproppriate one depending on the argument direction
+        // negative direction goes backwards in the m_formations array, positive goes forward
+        // loops around the m_formations array
         void rotate(int direction);
+        
     public:
         Piece(ShapeName shapeName);
 
+        // Chooses a random ShapeName
         static Piece getRandomPiece();
 
         void rotateClockwise();
