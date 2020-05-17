@@ -42,131 +42,131 @@ namespace tetris {
 
             case ShapeName::O_TETROMINO: {
                 Piece::PieceShape pieceShapeDeg0{0, intShapeName, intShapeName, 0, 
-                                    0, intShapeName, intShapeName, 0, 
-                                    0, 0, 0, 0, 
-                                    0, 0, 0, 0};
+                                                 0, intShapeName, intShapeName, 0, 
+                                                 0, 0, 0, 0, 
+                                                 0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg90{0, intShapeName, intShapeName, 0, 
-                                    0, intShapeName, intShapeName, 0, 
-                                    0, 0, 0, 0, 
-                                    0, 0, 0, 0};
+                                                  0, intShapeName, intShapeName, 0, 
+                                                  0, 0, 0, 0, 
+                                                  0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg180{0, intShapeName, intShapeName, 0, 
-                                    0, intShapeName, intShapeName, 0, 
-                                    0, 0, 0, 0, 
-                                    0, 0, 0, 0};
+                                                   0, intShapeName, intShapeName, 0, 
+                                                   0, 0, 0, 0, 
+                                                   0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg270{0, intShapeName, intShapeName, 0, 
-                                    0, intShapeName, intShapeName, 0, 
-                                    0, 0, 0, 0, 
-                                    0, 0, 0, 0};
+                                                   0, intShapeName, intShapeName, 0, 
+                                                   0, 0, 0, 0, 
+                                                   0, 0, 0, 0};
                 m_formations = {pieceShapeDeg0, pieceShapeDeg90, pieceShapeDeg180, pieceShapeDeg270};
                 break;
             }
 
             case ShapeName::T_TETROMINO: {
                 Piece::PieceShape pieceShapeDeg0{0, intShapeName, 0, 0, 
-                                    intShapeName, intShapeName, intShapeName, 0, 
-                                    0, 0, 0, 0, 
-                                    0, 0, 0, 0};
+                                                 intShapeName, intShapeName, intShapeName, 0, 
+                                                 0, 0, 0, 0, 
+                                                 0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg90{0, intShapeName, 0, 0, 
-                                    intShapeName, intShapeName, 0, 0, 
-                                    0, intShapeName, 0, 0, 
-                                    0, 0, 0, 0};
+                                                  intShapeName, intShapeName, 0, 0, 
+                                                  0, intShapeName, 0, 0, 
+                                                  0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg180{0, 0, 0, 0, 
-                                    intShapeName, intShapeName, intShapeName, 0, 
-                                    0, intShapeName, 0, 0, 
-                                    0, 0, 0, 0};
+                                                   intShapeName, intShapeName, intShapeName, 0, 
+                                                   0, intShapeName, 0, 0, 
+                                                   0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg270{0, intShapeName, 0, 0, 
-                                    0, intShapeName, intShapeName, 0, 
-                                    0, intShapeName, 0, 0, 
-                                    0, 0, 0, 0};
+                                                   0, intShapeName, intShapeName, 0, 
+                                                   0, intShapeName, 0, 0, 
+                                                   0, 0, 0, 0};
                 m_formations = {pieceShapeDeg0, pieceShapeDeg90, pieceShapeDeg180, pieceShapeDeg270};
                 break;
             }
 
             case ShapeName::S_TETROMINO: {
                 Piece::PieceShape pieceShapeDeg0{0, intShapeName, intShapeName, 0, 
-                                    intShapeName, intShapeName, 0, 0, 
-                                    0, 0, 0, 0, 
-                                    0, 0, 0, 0};
+                                                 intShapeName, intShapeName, 0, 0, 
+                                                 0, 0, 0, 0, 
+                                                 0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg90{intShapeName, 0, 0, 0, 
-                                    intShapeName, intShapeName, 0, 0, 
-                                    0, intShapeName, 0, 0, 
-                                    0, 0, 0, 0};
+                                                  intShapeName, intShapeName, 0, 0, 
+                                                  0, intShapeName, 0, 0, 
+                                                  0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg180{0, 0, 0, 0, 
-                                    0, intShapeName, intShapeName, 0, 
-                                    intShapeName, intShapeName, 0, 0, 
-                                    0, 0, 0, 0};
+                                                   0, intShapeName, intShapeName, 0, 
+                                                   intShapeName, intShapeName, 0, 0, 
+                                                   0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg270{0, intShapeName, 0, 0, 
-                                    0, intShapeName, intShapeName, 0, 
-                                    0, 0, intShapeName, 0, 
-                                    0, 0, 0, 0};
+                                                   0, intShapeName, intShapeName, 0, 
+                                                   0, 0, intShapeName, 0, 
+                                                   0, 0, 0, 0};
                 m_formations = {pieceShapeDeg0, pieceShapeDeg90, pieceShapeDeg180, pieceShapeDeg270};
                 break;
             }
 
             case ShapeName::Z_TETROMINO: {
                 Piece::PieceShape pieceShapeDeg0{intShapeName, intShapeName, 0, 0, 
-                                    0, intShapeName, intShapeName, 0, 
-                                    0, 0, 0, 0, 
-                                    0, 0, 0, 0};
+                                                 0, intShapeName, intShapeName, 0, 
+                                                 0, 0, 0, 0, 
+                                                 0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg90{0, intShapeName, 0, 0, 
-                                    intShapeName, intShapeName, 0, 0, 
-                                    intShapeName, 0, 0, 0, 
-                                    0, 0, 0, 0};
+                                                  intShapeName, intShapeName, 0, 0, 
+                                                  intShapeName, 0, 0, 0, 
+                                                  0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg180{0, 0, 0, 0, 
-                                    intShapeName, intShapeName, 0, 0, 
-                                    0, intShapeName, intShapeName, 0, 
-                                    0, 0, 0, 0};
+                                                   intShapeName, intShapeName, 0, 0, 
+                                                   0, intShapeName, intShapeName, 0, 
+                                                   0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg270{0, 0, intShapeName, 0, 
-                                    0, intShapeName, intShapeName, 0, 
-                                    0, intShapeName, 0, 0, 
-                                    0, 0, 0, 0};
+                                                   0, intShapeName, intShapeName, 0, 
+                                                   0, intShapeName, 0, 0, 
+                                                   0, 0, 0, 0};
                 m_formations = {pieceShapeDeg0, pieceShapeDeg90, pieceShapeDeg180, pieceShapeDeg270};
                 break;
             }
 
             case ShapeName::J_TETROMINO: {
                 Piece::PieceShape pieceShapeDeg0{intShapeName, 0, 0, 0, 
-                                    intShapeName, intShapeName, intShapeName, 0, 
-                                    0, 0, 0, 0, 
-                                    0, 0, 0, 0};
+                                                 intShapeName, intShapeName, intShapeName, 0, 
+                                                 0, 0, 0, 0, 
+                                                 0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg90{0, intShapeName, 0, 0, 
-                                    0, intShapeName, 0, 0, 
-                                    intShapeName, intShapeName, 0, 0, 
-                                    0, 0, 0, 0};
+                                                  0, intShapeName, 0, 0, 
+                                                  intShapeName, intShapeName, 0, 0, 
+                                                  0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg180{0, 0, 0, 0, 
-                                    intShapeName, intShapeName, intShapeName, 0, 
-                                    0, 0, intShapeName, 0, 
-                                    0, 0, 0, 0};
+                                                   intShapeName, intShapeName, intShapeName, 0, 
+                                                   0, 0, intShapeName, 0, 
+                                                   0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg270{0, intShapeName, intShapeName, 0, 
-                                    0, intShapeName, 0, 0, 
-                                    0, intShapeName, 0, 0, 
-                                    0, 0, 0, 0};
+                                                   0, intShapeName, 0, 0, 
+                                                   0, intShapeName, 0, 0, 
+                                                   0, 0, 0, 0};
                 m_formations = {pieceShapeDeg0, pieceShapeDeg90, pieceShapeDeg180, pieceShapeDeg270};
                 break;
             }
 
             case ShapeName::L_TETROMINO: {
                 Piece::PieceShape pieceShapeDeg0{0, 0, intShapeName, 0, 
-                                    intShapeName, intShapeName, intShapeName, 0, 
-                                    0, 0, 0, 0, 
-                                    0, 0, 0, 0};
+                                                 intShapeName, intShapeName, intShapeName, 0, 
+                                                 0, 0, 0, 0, 
+                                                 0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg90{intShapeName, intShapeName, 0, 0, 
-                                    0, intShapeName, 0, 0, 
-                                    0, intShapeName, 0, 0, 
-                                    0, 0, 0, 0};
+                                                  0, intShapeName, 0, 0, 
+                                                  0, intShapeName, 0, 0, 
+                                                  0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg180{0, 0, 0, 0, 
-                                    intShapeName, intShapeName, intShapeName, 0, 
-                                    intShapeName, 0, 0, 0, 
-                                    0, 0, 0, 0};
+                                                   intShapeName, intShapeName, intShapeName, 0, 
+                                                   intShapeName, 0, 0, 0, 
+                                                   0, 0, 0, 0};
                 Piece::PieceShape pieceShapeDeg270{0, intShapeName, 0, 0, 
-                                    0, intShapeName, 0, 0, 
-                                    0, intShapeName, intShapeName, 0, 
-                                    0, 0, 0, 0};
+                                                   0, intShapeName, 0, 0, 
+                                                   0, intShapeName, intShapeName, 0, 
+                                                   0, 0, 0, 0};
                 m_formations = {pieceShapeDeg0, pieceShapeDeg90, pieceShapeDeg180, pieceShapeDeg270};
                 break;
             }
 
-            default: { // throw exception here
+            default: { //TODO throw exception here
                 break;
             }
         }
