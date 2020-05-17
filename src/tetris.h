@@ -19,6 +19,8 @@ namespace tetris {
     };
 
     enum class ShapeName {
+        MIN_SHAPES,
+
         I_TETROMINO,
         O_TETROMINO,
         T_TETROMINO,
@@ -30,24 +32,16 @@ namespace tetris {
         MAX_SHAPES
     };
 
-    // struct PieceShape {
-    //     ShapeName m_shapeName;
-    //     std::array<mycontainers::Matrix<int, 4, 4>, 4> m_structures;
-
-    //     PieceShape(ShapeName shapeName);
-    // };
-
     class Piece {
+    public:
         typedef mycontainers::Matrix<int, 4, 4> PieceShape;
-        typedef std::array<PieceShape, RotationDeg::MAX_ROTATIONS> Formations
+        typedef std::array<PieceShape, static_cast<std::size_t>(RotationDeg::MAX_ROTATIONS)> Formations;
 
     private:
         Formations m_formations;
         ShapeName m_shapeName;
         RotationDeg m_currentRotation = RotationDeg::DEGREE_0;
         
-        Piece(ShapeName shapeName, Formations formations);
-
         void rotate(int direction);
     public:
         Piece(ShapeName shapeName);
@@ -56,7 +50,8 @@ namespace tetris {
 
         void rotateClockwise();
         void rotateCounterClockwise();
-        PieceShape currentStructure();
+        PieceShape& currentFormation();
+        ShapeName getShapeName();
     };
 
 }
