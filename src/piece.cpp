@@ -193,12 +193,12 @@ namespace tetris {
     }
 
     const Piece::PieceShape& Piece::currentFormation() const {
-        return m_formations.at(static_cast<int>(m_currentRotation));
+        return m_formations[static_cast<int>(m_currentRotation)];
     }
 
-    const int& Piece::currentFormationElement(std::size_t row, std::size_t col) const {
-        return currentFormation().view(row, col);
-    }
+    // const int& Piece::currentFormationElement(std::size_t row, std::size_t col) const {
+    //     return currentFormation().view(row, col);
+    // }
 
     Piece::ShapeName Piece::getShapeName() {
         return m_shapeName;
