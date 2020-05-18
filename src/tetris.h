@@ -31,8 +31,8 @@ namespace tetris {
         // Assumes piece can be placed
         void placePieceInField(const Piece& piece, const Coords2D& position);
 
-        void movePiece(int hrzntlDirection, int vrtclDirection);
         void nextPiece();
+        void movePiece(int hrzntlDirection, int vrtclDirection);
         void clearLines();
 
     public:

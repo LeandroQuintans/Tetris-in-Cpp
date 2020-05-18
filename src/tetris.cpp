@@ -3,9 +3,9 @@
 namespace tetris {
 
     Tetris::Tetris(): m_playfield{}, m_pieceBuffer{} {
+        m_currentPiece = Piece::getRandomPiece();
         for (int i = 0; i < 3; ++i)
             m_pieceBuffer.push(Piece::getRandomPiece());
-        m_currentPiece = Piece::getRandomPiece();
     }
 
     bool Tetris::canPieceBePlaced(const Piece& piece, const Coords2D& position) const {
@@ -41,5 +41,11 @@ namespace tetris {
                 }
             }
         }
+    }
+
+    void Tetris::nextPiece() {
+        m_currentPiece = m_pieceBuffer.front();
+        m_pieceBuffer.pop();
+        m_pieceBuffer.push(Piece::getRandomPiece());
     }
 }
