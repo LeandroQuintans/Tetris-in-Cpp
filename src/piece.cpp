@@ -15,6 +15,9 @@ namespace tetris {
     }
 
 
+    Piece::Piece(): m_formations{}, m_shapeName{ShapeName::MIN_SHAPES} {
+    }
+
     Piece::Piece(ShapeName shapeName) {
         int intShapeName = static_cast<int>(shapeName);
 
@@ -172,8 +175,6 @@ namespace tetris {
         }
 
         m_shapeName = shapeName;
-
-        // Piece(shapeName, formations);
     }
 
     Piece Piece::getRandomPiece() {
@@ -191,19 +192,18 @@ namespace tetris {
         rotate(1);
     }
 
-    Piece::PieceShape& Piece::currentFormation() {
-        // for (int i = 0; i < 4; ++i) {
-        //     for (int j = 0; j < 4; ++j) {
-        //         std::cout << m_formations.at(0).at(i, j);
-        //     }
-        //     std::cout << '\n';
-        // }
-
+    const Piece::PieceShape& Piece::currentFormation() const {
         return m_formations.at(static_cast<int>(m_currentRotation));
     }
 
     ShapeName Piece::getShapeName() {
         return m_shapeName;
+    }
+
+    std::ostream& operator<< (std::ostream &out, const Piece &piece) {
+        out << piece.currentFormation();
+
+        return out;
     }
 
 }

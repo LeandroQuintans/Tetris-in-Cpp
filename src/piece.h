@@ -4,6 +4,7 @@
 #include <array>
 #include <ctime>
 #include <random>
+#include <iostream>
 
 #include "matrix.h"
 
@@ -48,6 +49,7 @@ namespace tetris {
         void rotate(int direction);
         
     public:
+        Piece();
         Piece(ShapeName shapeName);
 
         // Chooses a random ShapeName
@@ -55,8 +57,10 @@ namespace tetris {
 
         void rotateClockwise();
         void rotateCounterClockwise();
-        PieceShape& currentFormation();
+        const PieceShape& currentFormation() const;
         ShapeName getShapeName();
+
+        friend std::ostream& operator<<(std::ostream &out, const Piece &piece);
     };
 }
 
