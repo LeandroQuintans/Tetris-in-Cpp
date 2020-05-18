@@ -9,32 +9,31 @@
 #include "matrix.h"
 
 namespace tetris {
-
-    enum class RotationDeg {
-        DEGREE_0,
-        DEGREE_90,
-        DEGREE_180,
-        DEGREE_270,
-
-        MAX_ROTATIONS
-    };
-
-    enum class ShapeName {
-        MIN_SHAPES,
-
-        I_TETROMINO,
-        O_TETROMINO,
-        T_TETROMINO,
-        S_TETROMINO,
-        Z_TETROMINO,
-        J_TETROMINO,
-        L_TETROMINO,
-
-        MAX_SHAPES
-    };
-
     class Piece {
     public:
+        enum class ShapeName {
+            MIN_SHAPES,
+
+            I_TETROMINO,
+            O_TETROMINO,
+            T_TETROMINO,
+            S_TETROMINO,
+            Z_TETROMINO,
+            J_TETROMINO,
+            L_TETROMINO,
+
+            MAX_SHAPES
+        };
+
+        enum class RotationDeg {
+            DEGREE_0,
+            DEGREE_90,
+            DEGREE_180,
+            DEGREE_270,
+
+            MAX_ROTATIONS
+        };
+
         typedef mycontainers::Matrix<int, 4, 4> PieceShape;
         typedef std::array<PieceShape, static_cast<std::size_t>(RotationDeg::MAX_ROTATIONS)> Formations;
 

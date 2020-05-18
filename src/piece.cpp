@@ -196,7 +196,7 @@ namespace tetris {
         return m_formations.at(static_cast<int>(m_currentRotation));
     }
 
-    ShapeName Piece::getShapeName() {
+    Piece::ShapeName Piece::getShapeName() {
         return m_shapeName;
     }
 
