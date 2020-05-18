@@ -18,7 +18,7 @@ namespace mycontainers {
         std::size_t getHeight() const;
 
         // Returns reference to element at row and col
-        T& at(const std::size_t row, const std::size_t col) const;
+        T& at(const std::size_t row, const std::size_t col);
 
         // Returns const reference to element at row and col
         const T& view(const std::size_t row, std::size_t col) const;
