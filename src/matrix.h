@@ -1,6 +1,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+// #include <array>
 #include <stdexcept>
 #include <iostream>
 
@@ -13,11 +14,16 @@ namespace mycontainers {
         // Support height = 0 and width = 0
         T m_matrix[height ? height : 1][width ? width : 1];
 
-        std::size_t getWidth();
-        std::size_t getHeight();
+        std::size_t getWidth() const;
+        std::size_t getHeight() const;
 
         // Returns reference to element at row and col
-        T& at(std::size_t row, std::size_t col);
+        T& at(std::size_t row, std::size_t col) const;
+
+        // Returns an array with indexes for the requested row
+        // std::array<std::size_t, width> atRow(std::size_t row) const;
+        // Returns an array with indexes for the requested col
+        // std::array<std::size_t, height> atCol(std::size_t col) const;
 
         friend std::ostream& operator<<(std::ostream &out, const Matrix<T, width, height> &matrix) {
             for (std::size_t i = 0; i < height; ++i) {
