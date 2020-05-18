@@ -20,10 +20,15 @@ namespace tetris {
         int m_linesCleared = 0;
         std::queue<Piece> m_pieceBuffer;
         Piece m_currentPiece;
-        Coords2D m_piecePosition;
 
-        bool canPieceBePlaced(const Piece& piece, const Coords2D position) const;
+        // m_piecePosition is a pair of row and col indexes that point to where the
+        // first element of the m_currentPiece formation should be translated to in the
+        // m_playfield
+        Coords2D m_piecePosition{0, 3};
+
+        bool canPieceBePlaced(const Piece& piece, const Coords2D& position) const;
         void movePiece(int hrzntlDirection, int vrtclDirection);
+        void placePieceInField();
 
     public:
         Tetris();
