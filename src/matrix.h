@@ -13,6 +13,9 @@ namespace mycontainers {
         // Support height = 0 and width = 0
         T m_matrix[height ? height : 1][width ? width : 1];
 
+        std::size_t getWidth();
+        std::size_t getHeight();
+
         // Returns reference to element at row and col
         T& at(std::size_t row, std::size_t col);
 
