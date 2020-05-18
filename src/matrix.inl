@@ -19,14 +19,15 @@ namespace mycontainers {
         return m_matrix[row][col];
     }
 
-    template<class T, std::size_t width, std::size_t height>
-    const T& Matrix<T, width, height>::view(std::size_t row, std::size_t col) const {
-        if (row >= height)
-            throw std::out_of_range("row out of bounds");
-        if (col >= width)
-            throw std::out_of_range("col out of bounds");
+    // // Exactly the same as at function, I didn't have time to research a better way
+    // template<class T, std::size_t width, std::size_t height>
+    // const T& Matrix<T, width, height>::view(std::size_t row, std::size_t col) const {
+    //     if (row >= height)
+    //         throw std::out_of_range("row out of bounds");
+    //     if (col >= width)
+    //         throw std::out_of_range("col out of bounds");
 
-        return m_matrix[row][col];
-    }
+    //     return m_matrix[row][col];
+    // }
 
 }

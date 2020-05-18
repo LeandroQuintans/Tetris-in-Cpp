@@ -19,15 +19,10 @@ namespace mycontainers {
         // Returns reference to element at row and col
         T& at(std::size_t row, std::size_t col);
 
-    private:
-        // Returns constant reference to element at row and col (used for operator<<)
-        const T& view(std::size_t row, std::size_t col) const;
-
-    public:
         friend std::ostream& operator<<(std::ostream &out, const Matrix<T, width, height> &matrix) {
             for (std::size_t i = 0; i < height; ++i) {
                 for (std::size_t j = 0; j < width; ++j)
-                    out << matrix.view(i, j) << ' ';
+                    out << matrix.m_matrix[i][j] << ' ';
                 out << '\n';
             }
             return out;
