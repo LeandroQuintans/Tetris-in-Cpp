@@ -27,8 +27,13 @@ namespace tetris {
         Coords2D m_piecePosition{0, 3};
 
         bool canPieceBePlaced(const Piece& piece, const Coords2D& position) const;
+
+        // Assumes piece can be placed
+        void placePieceInField(const Piece& piece, const Coords2D& position);
+
         void movePiece(int hrzntlDirection, int vrtclDirection);
-        void placePieceInField();
+        void nextPiece();
+        void clearLines();
 
     public:
         Tetris();
@@ -40,7 +45,6 @@ namespace tetris {
         void rotatePieceCounterClockwise();
         void softDropPiece();
         void hardDropPiece();
-        void clearLines();
 
         void gameLoop();
     };
