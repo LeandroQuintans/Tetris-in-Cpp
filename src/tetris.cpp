@@ -28,4 +28,18 @@ namespace tetris {
 
         return true;
     }
+
+    void Tetris::placePieceInField(const Piece& piece, const Coords2D& position) {
+        std::size_t pieceFormHeight = piece.currentFormation().getHeight();
+        std::size_t pieceFormWidth = piece.currentFormation().getWidth();
+
+        for (std::size_t i = 0; i < pieceFormHeight; ++i) {
+            for (std::size_t j = 0; j < pieceFormWidth; ++j) {
+                if (piece.currentFormation().view(i, j)) {
+                    m_playfield.at(i + position.first, j + position.second) 
+                        = piece.currentFormation().view(i, j);
+                }
+            }
+        }
+    }
 }
