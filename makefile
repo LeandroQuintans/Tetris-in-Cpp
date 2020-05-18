@@ -8,10 +8,10 @@ OBJDIR=obj
 BINDIR=bin
 
 
-_DEPS=matrix.h piece.h
+_DEPS=matrix.h piece.h tetris.h
 DEPS=$(patsubst %,$(SRCDIR)/%,$(_DEPS))
 
-_OBJ=main.o piece.o
+_OBJ=main.o piece.o tetris.o
 OBJ=$(patsubst %,$(OBJDIR)/%,$(_OBJ))
 
 _OBJ_UNITTEST=matrix_unittests.o
