@@ -60,4 +60,26 @@ namespace tetris {
         }
         return false;
     }
+
+    void Tetris::clearLines() {
+        bool clear = true;
+        for (std::size_t i = m_piecePosition.first; i < m_playfield.getHeight(); ++i) {
+            for (std::size_t j = 0; j < m_playfield.getWidth(); ++j) {
+                if (!m_playfield.view(i, j)) {
+                    clear = false;
+                    ++m_linesCleared;
+                    break;
+                }
+            }
+            if (clear) {
+                for (std::size_t i2 = i; i2 > 0; --i2) {
+                    for (std::size_t j2 = 0; j2 < m_playfield.getWidth(); ++j2) {
+                        m_playfield.at(i2, j2) = m_playfield.at(i2-1, j2);
+                    }
+                }
+            }
+            clear = true;
+        }
+    }
+
 }
