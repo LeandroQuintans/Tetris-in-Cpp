@@ -111,7 +111,10 @@ namespace tetris {
     }
 
     void Tetris::hardDropPiece() {
-
+        bool prolong;
+        do {
+            prolong = movePieceDown();
+        } while (prolong);
     }
 
     int Tetris::level() {
