@@ -48,4 +48,16 @@ namespace tetris {
         m_pieceBuffer.pop();
         m_pieceBuffer.push(Piece::getRandomPiece());
     }
+
+    bool Tetris::movePiece(int vrtclDirection, int hrzntlDirection) {
+        if (canPieceBePlaced(m_currentPiece, Coords2D{
+                                                m_piecePosition.first+vrtclDirection,
+                                                m_piecePosition.second+hrzntlDirection
+                                            })) {
+            m_piecePosition.first += vrtclDirection;
+            m_piecePosition.second += hrzntlDirection;
+            return true;
+        }
+        return false;
+    }
 }
