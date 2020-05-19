@@ -32,17 +32,17 @@ namespace tetris {
         void placePieceInField(const Piece& piece, const Coords2D& position);
 
         void nextPiece();
-        void movePiece(int hrzntlDirection, int vrtclDirection);
+        bool movePiece(int vrtclDirection, int hrzntlDirection);
         void clearLines();
 
     public:
         Tetris();
 
-        void movePieceLeft();
-        void movePieceRight();
-        void movePieceDown();
-        void rotatePieceClockwise();
-        void rotatePieceCounterClockwise();
+        bool movePieceLeft();
+        bool movePieceRight();
+        bool movePieceDown();
+        bool rotatePieceClockwise();
+        bool rotatePieceCounterClockwise();
         void softDropPiece();
         void hardDropPiece();
 
