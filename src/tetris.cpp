@@ -82,4 +82,40 @@ namespace tetris {
         }
     }
 
+    bool Tetris::movePieceLeft() {
+        return movePiece(0, -1);
+    }
+
+    bool Tetris::movePieceRight() {
+        return movePiece(0, 1);
+    }
+
+    bool Tetris::movePieceDown() {
+        return movePiece(1, 0);
+    }
+
+    void Tetris::rotatePieceClockwise() {
+        do {
+            m_currentPiece.rotatePieceClockwise();
+        } while (!canPieceBePlaced(m_currentPiece, m_piecePosition));
+    }
+
+    void Tetris::rotatePieceCounterClockwise() {
+        do {
+            m_currentPiece.rotatePieceCounterClockwise();
+        } while (!canPieceBePlaced(m_currentPiece, m_piecePosition));
+    }
+
+    void Tetris::softDropPiece() {
+
+    }
+
+    void Tetris::hardDropPiece() {
+
+    }
+
+    void Tetris::level() {
+        return m_linesCleared % 10 + 1 > 20 ? 20 : m_linesCleared % 10 + 1;
+    }
+
 }

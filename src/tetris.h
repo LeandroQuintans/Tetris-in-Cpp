@@ -41,10 +41,12 @@ namespace tetris {
         bool movePieceLeft();
         bool movePieceRight();
         bool movePieceDown();
-        bool rotatePieceClockwise();
-        bool rotatePieceCounterClockwise();
+        void rotatePieceClockwise();
+        void rotatePieceCounterClockwise();
         void softDropPiece();
         void hardDropPiece();
+
+        void level();
 
         void gameLoop();
     };
