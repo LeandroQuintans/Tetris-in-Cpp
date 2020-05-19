@@ -46,7 +46,7 @@ namespace tetris {
         void softDropPiece();
         void hardDropPiece();
 
-        void level();
+        int level();
 
         void gameLoop();
     };

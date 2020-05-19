@@ -96,13 +96,13 @@ namespace tetris {
 
     void Tetris::rotatePieceClockwise() {
         do {
-            m_currentPiece.rotatePieceClockwise();
+            m_currentPiece.rotateClockwise();
         } while (!canPieceBePlaced(m_currentPiece, m_piecePosition));
     }
 
     void Tetris::rotatePieceCounterClockwise() {
         do {
-            m_currentPiece.rotatePieceCounterClockwise();
+            m_currentPiece.rotateCounterClockwise();
         } while (!canPieceBePlaced(m_currentPiece, m_piecePosition));
     }
 
@@ -114,7 +114,7 @@ namespace tetris {
 
     }
 
-    void Tetris::level() {
+    int Tetris::level() {
         return m_linesCleared % 10 + 1 > 20 ? 20 : m_linesCleared % 10 + 1;
     }
 
