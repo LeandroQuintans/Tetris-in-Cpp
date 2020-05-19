@@ -106,7 +106,11 @@ namespace tetris {
         } while (!canPieceBePlaced(m_currentPiece, m_piecePosition));
     }
 
-    void Tetris::softDropPiece() {
+    void Tetris::enableSoftDropPiece() {
+
+    }
+
+    void Tetris::disableSoftDropPiece() {
 
     }
 
@@ -119,6 +123,28 @@ namespace tetris {
 
     int Tetris::level() {
         return m_linesCleared % 10 + 1 > 20 ? 20 : m_linesCleared % 10 + 1;
+    }
+
+    double Tetris::stepTime() {
+        return pow(0.8 - ((level() - 1)*0.007), level() - 1);
+    }
+
+    std::ostream& operator<< (std::ostream &out, const Tetris &tetris) {
+        for (std::size_t i = 0; i < tetris.m_playfield.getHeight(); ++i) {
+            for (std::size_t j = 0; j < tetris.m_playfield.getWidth(); ++j) {
+                if (i >= tetris.m_piecePosition.first && i < tetris.m_piecePosition.first + tetris.m_currentPiece.currentFormation().getHeight()
+                    && j >= tetris.m_piecePosition.second && j < tetris.m_piecePosition.second + tetris.m_currentPiece.currentFormation().getWidth()
+                    && tetris.m_currentPiece.currentFormation().view(i - tetris.m_piecePosition.first, j - tetris.m_piecePosition.second)) {
+                    out << tetris.m_currentPiece.currentFormation().view(i - tetris.m_piecePosition.first, j - tetris.m_piecePosition.second) << ' ';
+                }
+                else {
+                    out << tetris.m_playfield.view(i, j) << ' ';
+                }
+            }
+            out << '\n';
+        }
+
+        return out;
     }
 
 }

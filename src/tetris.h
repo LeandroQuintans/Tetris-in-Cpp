@@ -4,6 +4,7 @@
 #include <queue>
 #include <utility>
 #include <iostream>
+#include <cmath>
 
 #include "matrix.h"
 #include "piece.h"
@@ -43,12 +44,18 @@ namespace tetris {
         bool movePieceDown();
         void rotatePieceClockwise();
         void rotatePieceCounterClockwise();
-        void softDropPiece();
+        void enableSoftDropPiece();
+        void disableSoftDropPiece();
         void hardDropPiece();
 
         int level();
 
+        // time in seconds
+        double stepTime();
+
         void gameLoop();
+
+        friend std::ostream& operator<<(std::ostream &out, const Tetris &tetris);
     };
 }
 
