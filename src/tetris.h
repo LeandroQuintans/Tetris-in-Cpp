@@ -5,6 +5,7 @@
 #include <utility>
 #include <iostream>
 #include <cmath>
+#include <ctime>
 
 #include "matrix.h"
 #include "piece.h"
@@ -26,6 +27,8 @@ namespace tetris {
         // first element of the m_currentPiece formation should be translated to in the
         // m_playfield
         Coords2D m_piecePosition{0, 3};
+
+        double m_stepTime = 1.0;
 
         bool canPieceBePlaced(const Piece& piece, const Coords2D& position) const;
 

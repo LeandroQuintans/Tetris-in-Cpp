@@ -107,11 +107,11 @@ namespace tetris {
     }
 
     void Tetris::enableSoftDropPiece() {
-
+        m_time /= 4.0;
     }
 
     void Tetris::disableSoftDropPiece() {
-
+        m_time *= 4.0;
     }
 
     void Tetris::hardDropPiece() {
@@ -125,8 +125,9 @@ namespace tetris {
         return m_linesCleared % 10 + 1 > 20 ? 20 : m_linesCleared % 10 + 1;
     }
 
-    double Tetris::stepTime() {
-        return pow(0.8 - ((level() - 1)*0.007), level() - 1);
+    void Tetris::updateStepTime() {
+        m_time = pow(0.8 - ((level() - 1)*0.007), level() - 1);
+    }
     }
 
     std::ostream& operator<< (std::ostream &out, const Tetris &tetris) {
@@ -146,5 +147,4 @@ namespace tetris {
 
         return out;
     }
-
 }
