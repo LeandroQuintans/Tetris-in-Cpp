@@ -5,7 +5,7 @@
 #include <utility>
 #include <iostream>
 #include <cmath>
-#include <ctime>
+#include <chrono>
 
 #include "matrix.h"
 #include "piece.h"
@@ -17,7 +17,7 @@ namespace tetris {
         typedef mycontainers::Matrix<int, 10, 20> Playfield;
         typedef std::pair<std::size_t, std::size_t> Coords2D;
 
-    public:
+    protected:
         Playfield m_playfield;
         int m_linesCleared = 0;
         std::queue<Piece> m_pieceBuffer;
@@ -28,16 +28,17 @@ namespace tetris {
         // m_playfield
         Coords2D m_piecePosition{0, 3};
 
+        // time in seconds
         double m_stepTime = 1.0;
 
         bool canPieceBePlaced(const Piece& piece, const Coords2D& position) const;
 
         // Assumes piece can be placed
-        void placePieceInField(const Piece& piece, const Coords2D& position);
+        virtual void placePieceInField(const Piece& piece, const Coords2D& position);
 
         void nextPiece();
-        bool movePiece(int vrtclDirection, int hrzntlDirection);
-        void clearLines();
+        virtual bool movePiece(int vrtclDirection, int hrzntlDirection);
+        virtual void clearLines();
 
     public:
         Tetris();
@@ -51,12 +52,13 @@ namespace tetris {
         void disableSoftDropPiece();
         void hardDropPiece();
 
+        Playfield currentPlayfield() const;
         int level();
+        void updateStepTime();
 
-        // time in seconds
-        double stepTime();
-
-        void gameLoop();
+        virtual void keystrokes();
+        virtual void extraGameloop(double deltaTime) = 0;
+        void gameloop();
 
         friend std::ostream& operator<<(std::ostream &out, const Tetris &tetris);
     };

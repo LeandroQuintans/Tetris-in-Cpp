@@ -47,6 +47,7 @@ namespace tetris {
         m_currentPiece = m_pieceBuffer.front();
         m_pieceBuffer.pop();
         m_pieceBuffer.push(Piece::getRandomPiece());
+        m_piecePosition = {0, 3};
     }
 
     bool Tetris::movePiece(int vrtclDirection, int hrzntlDirection) {
@@ -107,11 +108,11 @@ namespace tetris {
     }
 
     void Tetris::enableSoftDropPiece() {
-        m_time /= 4.0;
+        m_stepTime /= 4.0;
     }
 
     void Tetris::disableSoftDropPiece() {
-        m_time *= 4.0;
+        m_stepTime *= 4.0;
     }
 
     void Tetris::hardDropPiece() {
@@ -121,29 +122,59 @@ namespace tetris {
         } while (prolong);
     }
 
+    Tetris::Playfield Tetris::currentPlayfield() const {
+        Playfield result{};
+
+        for (std::size_t i = 0; i < m_playfield.getHeight(); ++i) {
+            for (std::size_t j = 0; j < m_playfield.getWidth(); ++j) {
+                if (i >= m_piecePosition.first && i < m_piecePosition.first + m_currentPiece.currentFormation().getHeight()
+                    && j >= m_piecePosition.second && j < m_piecePosition.second + m_currentPiece.currentFormation().getWidth()
+                    && m_currentPiece.currentFormation().view(i - m_piecePosition.first, j - m_piecePosition.second)) {
+                    result.at(i, j) = m_currentPiece.currentFormation().view(i - m_piecePosition.first, j - m_piecePosition.second);
+                }
+                else {
+                    result.at(i, j) = m_playfield.view(i, j);
+                }
+            }
+        }
+
+        return result;
+    }
+
+
     int Tetris::level() {
         return m_linesCleared % 10 + 1 > 20 ? 20 : m_linesCleared % 10 + 1;
     }
 
     void Tetris::updateStepTime() {
-        m_time = pow(0.8 - ((level() - 1)*0.007), level() - 1);
+        m_stepTime = pow(0.8 - ((level() - 1)*0.007), level() - 1);
     }
+
+    void Tetris::keystrokes() {
+    }
+
+    void Tetris::gameloop() {
+        bool game = true;
+        auto startTime(std::chrono::steady_clock::now());
+        while(game) {
+            double elapsedTime = std::chrono::duration<double>(std::chrono::steady_clock::now() - startTime).count();
+            if (elapsedTime >= m_stepTime) {
+                if (!movePieceDown()) {
+                    placePieceInField(m_currentPiece, m_piecePosition);
+                    nextPiece();
+                }
+                startTime = std::chrono::steady_clock::now();
+            }
+            // else {
+            //     keystrokes();
+
+            // }
+            extraGameloop(elapsedTime);
+        }
     }
 
     std::ostream& operator<< (std::ostream &out, const Tetris &tetris) {
-        for (std::size_t i = 0; i < tetris.m_playfield.getHeight(); ++i) {
-            for (std::size_t j = 0; j < tetris.m_playfield.getWidth(); ++j) {
-                if (i >= tetris.m_piecePosition.first && i < tetris.m_piecePosition.first + tetris.m_currentPiece.currentFormation().getHeight()
-                    && j >= tetris.m_piecePosition.second && j < tetris.m_piecePosition.second + tetris.m_currentPiece.currentFormation().getWidth()
-                    && tetris.m_currentPiece.currentFormation().view(i - tetris.m_piecePosition.first, j - tetris.m_piecePosition.second)) {
-                    out << tetris.m_currentPiece.currentFormation().view(i - tetris.m_piecePosition.first, j - tetris.m_piecePosition.second) << ' ';
-                }
-                else {
-                    out << tetris.m_playfield.view(i, j) << ' ';
-                }
-            }
-            out << '\n';
-        }
+        out << tetris.currentPlayfield();
 
         return out;
     }
