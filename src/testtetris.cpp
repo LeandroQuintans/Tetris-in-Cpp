@@ -5,7 +5,7 @@ TestTetris::TestTetris(): Tetris() {
 }
 
 bool TestTetris::keystrokes() {
-    // if (kbhit()) {
+    if (kbhit()) {
     //     int key = getch();
     //     if (key == 105) {
     //         rotatePieceClockwise();
@@ -17,7 +17,6 @@ bool TestTetris::keystrokes() {
     //         enableSoftDropPiece();
     //     }
     //     // else if (key ==) {
-            
     //     // }
     //     else if(key == 108) {
     //         movePieceRight();
@@ -27,9 +26,6 @@ bool TestTetris::keystrokes() {
     //     }
     //     else if(key == 32) {
     //         hardDropPiece();
-    //         placePieceInField(m_currentPiece, m_piecePosition);
-    //         clearLines();
-    //         nextPiece();
     //     }
     //     return true;
     // }
@@ -37,7 +33,7 @@ bool TestTetris::keystrokes() {
 }
 
 void TestTetris::nextStateExtra(double elapsedTime, bool keyHit) {
-    if (elapsedTime >= m_stepTime) {
+    if (elapsedTime >= m_stepTimeUsed) {
         std::cout << Tetris::currentPlayfield() << '\n';
     }
     if (keyHit) {

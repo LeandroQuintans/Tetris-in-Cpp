@@ -108,11 +108,11 @@ namespace tetris {
     }
 
     void Tetris::enableSoftDropPiece() {
-        m_stepTime /= 10.0;
+        m_stepTimeUsed = m_stepTimeRef /= 10.0;
     }
 
     void Tetris::disableSoftDropPiece() {
-        m_stepTime *= 10.0;
+        m_stepTimeUsed = m_stepTimeRef *= 10.0;
     }
 
     void Tetris::hardDropPiece() {
@@ -120,6 +120,9 @@ namespace tetris {
         do {
             prolong = movePieceDown();
         } while (prolong);
+        placePieceInField(m_currentPiece, m_piecePosition);
+        clearLines();
+        nextPiece();
     }
 
     Tetris::Playfield Tetris::currentPlayfield() const {
@@ -150,7 +153,7 @@ namespace tetris {
     }
 
     void Tetris::updateStepTime() {
-        m_stepTime = pow(0.8 - ((level() - 1)*0.007), level() - 1);
+        m_stepTimeRef = pow(0.8 - ((level() - 1)*0.007), level() - 1);
     }
 
     // void Tetris::keystrokes() {}
@@ -160,7 +163,7 @@ namespace tetris {
     bool Tetris::nextState(double elapsedTime, std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds>& startTime) {
         bool keyHit = false;
         if (canPieceBePlaced(m_currentPiece, m_piecePosition)) {
-            if (elapsedTime >= m_stepTime) {
+            if (elapsedTime >= m_stepTimeUsed) {
                 if (!movePieceDown()) {
                     placePieceInField(m_currentPiece, m_piecePosition);
                     clearLines();
