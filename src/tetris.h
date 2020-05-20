@@ -15,7 +15,7 @@ namespace tetris {
     class Tetris {
     public:
         typedef mycontainers::Matrix<int, 10, 20> Playfield;
-        typedef std::pair<std::size_t, std::size_t> Coords2D;
+        typedef std::pair<int, int> Coords2D;
 
     protected:
         Playfield m_playfield;
@@ -56,8 +56,8 @@ namespace tetris {
         int level();
         void updateStepTime();
 
-        virtual void keystrokes();
-        virtual void extraGameloop(double deltaTime) = 0;
+        virtual bool keystrokes() = 0;
+        virtual void extraGameloop(double deltaTime, bool keyHit) = 0;
         void gameloop();
 
         friend std::ostream& operator<<(std::ostream &out, const Tetris &tetris);

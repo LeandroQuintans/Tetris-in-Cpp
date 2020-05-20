@@ -108,11 +108,11 @@ namespace tetris {
     }
 
     void Tetris::enableSoftDropPiece() {
-        m_stepTime /= 4.0;
+        m_stepTime /= 10.0;
     }
 
     void Tetris::disableSoftDropPiece() {
-        m_stepTime *= 4.0;
+        m_stepTime *= 10.0;
     }
 
     void Tetris::hardDropPiece() {
@@ -126,15 +126,19 @@ namespace tetris {
         Playfield result{};
 
         for (std::size_t i = 0; i < m_playfield.getHeight(); ++i) {
+            int iInt = static_cast<int>(i);
             for (std::size_t j = 0; j < m_playfield.getWidth(); ++j) {
-                if (i >= m_piecePosition.first && i < m_piecePosition.first + m_currentPiece.currentFormation().getHeight()
-                    && j >= m_piecePosition.second && j < m_piecePosition.second + m_currentPiece.currentFormation().getWidth()
+                int jInt = static_cast<int>(j);
+                if (iInt >= m_piecePosition.first && iInt < m_piecePosition.first + static_cast<int>(m_currentPiece.currentFormation().getHeight())
+                    && jInt >= m_piecePosition.second && jInt < m_piecePosition.second + static_cast<int>(m_currentPiece.currentFormation().getWidth())
                     && m_currentPiece.currentFormation().view(i - m_piecePosition.first, j - m_piecePosition.second)) {
-                    result.at(i, j) = m_currentPiece.currentFormation().view(i - m_piecePosition.first, j - m_piecePosition.second);
+                        result.at(i, j) = m_currentPiece.currentFormation().view(i - m_piecePosition.first, j - m_piecePosition.second);
+
                 }
                 else {
                     result.at(i, j) = m_playfield.view(i, j);
                 }
+                // if (m_piecePosition.second > m_playfield.getWidth()) std::cout << "yay" << '\n';    
             }
         }
 
@@ -150,26 +154,30 @@ namespace tetris {
         m_stepTime = pow(0.8 - ((level() - 1)*0.007), level() - 1);
     }
 
-    void Tetris::keystrokes() {
-    }
+    // void Tetris::keystrokes() {}
 
     void Tetris::gameloop() {
         bool game = true;
         auto startTime(std::chrono::steady_clock::now());
+        bool keyHit = false;
         while(game) {
             double elapsedTime = std::chrono::duration<double>(std::chrono::steady_clock::now() - startTime).count();
-            if (elapsedTime >= m_stepTime) {
-                if (!movePieceDown()) {
-                    placePieceInField(m_currentPiece, m_piecePosition);
-                    nextPiece();
+            if (canPieceBePlaced(m_currentPiece, m_piecePosition)) {
+                if (elapsedTime >= m_stepTime) {
+                    if (!movePieceDown()) {
+                        placePieceInField(m_currentPiece, m_piecePosition);
+                        clearLines();
+                        nextPiece();
+                    }
+                    startTime = std::chrono::steady_clock::now();
                 }
-                startTime = std::chrono::steady_clock::now();
+                keyHit = keystrokes();
             }
-            // else {
-            //     keystrokes();
-
-            // }
-            extraGameloop(elapsedTime);
+            else {
+                game = false;
+            }
+            extraGameloop(elapsedTime, keyHit);
+            keyHit = false;
         }
     }
 
