@@ -2,7 +2,7 @@ CXX=g++
 CXXFLAGS=-Wall -std=c++17
 
 ifeq ($(OS),Windows_NT)
-	LIBFLAGS:=-lglu32 -lSOIL -lopengl32 -lfreeglut
+	LIBFLAGS:=-lglu32 -lSOIL -lopengl32 -lfreeglut -lm
 else
 	LIBFLAGS:=-lGL -lGLU -lSOIL -lglut -lm
 endif
@@ -29,7 +29,7 @@ main: $(OBJ)
 	$(CXX) -o $(BINDIR)/main.out $^ $(CXXFLAGS) -L $(LIBDIR) $(LIBFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
-	$(CXX) -c $< -o $@ $(CXXFLAGS) -I $(SRCDIR) -L $(LIBDIR) $(LIBFLAGS)
+	$(CXX) -c $< -o $@ $(CXXFLAGS) -L $(LIBDIR) $(LIBFLAGS) -I $(SRCDIR)
 
 .PHONY: all_unittests
 all_unittests: matrix_unittests
@@ -38,7 +38,7 @@ matrix_unittests: $(OBJ_UNITTEST)
 	$(CXX) -o $(BINDIR)/matrix_unittests.exe $^ $(CXXFLAGS) -L $(LIBDIR) $(LIBFLAGS)
 
 $(OBJDIR)/%.o: $(UTESTDIR)/%.cpp $(DEPS)
-	$(CXX) -c $< -o $@ $(CXXFLAGS) -I $(UTESTDIR) -I $(SRCDIR) -L $(LIBDIR) $(LIBFLAGS)
+	$(CXX) -c $< -o $@ $(CXXFLAGS) -I $(UTESTDIR) -L $(LIBDIR) $(LIBFLAGS) -I $(SRCDIR)
 
 .PHONY: clean
 clean:
