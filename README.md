@@ -1,2 +1,2 @@
-# Tetris-in-Cpp
-Very naif implementation of Tetris. It doesn't follow all the Tetris guidelines.
+# OpenGL-Tetris
+OpenGL interface for the forked tetris implementation
