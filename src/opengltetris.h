@@ -9,7 +9,7 @@ class OpenGLTetris: public tetris::Tetris {
 public:
     OpenGLTetris();
     virtual bool keystrokes() override final;
-    virtual void extraGameloop(double deltaTime, bool keyHit) override final;
+    virtual void nextStateExtra(double elapsedTime, bool keyHit) override final;
 };
 
 #endif

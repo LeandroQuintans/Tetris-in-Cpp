@@ -58,7 +58,7 @@ namespace tetris {
 
         virtual bool keystrokes() = 0;
         virtual void nextStateExtra(double elapsedTime, bool keyHit);
-        virtual bool nextState(double elapsedTime, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long long int, std::ratio<1, 1000000000>>>& startTime);
+        virtual bool nextState(double elapsedTime, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long int, std::ratio<1, 1000000000>>>& startTime);
         void gameloop();
 
         friend std::ostream& operator<<(std::ostream &out, const Tetris &tetris);

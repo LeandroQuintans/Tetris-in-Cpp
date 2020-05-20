@@ -15,7 +15,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-#define SIDE 0.01
+#define SIDE 0.005
 #define SIZE 0.01
 #define PI 3.14
 
@@ -23,12 +23,19 @@ using namespace std;
 #define CAMERA_FAR 1000 // TODO: ajust this
 // GLOBALS
 
+auto startTime(std::chrono::steady_clock::now());
+int game_time_counter = 1;
+double elapsedTime;
+OpenGLTetris oglt;
+
+
 GLint QUADS  = 2;
 GLint LIGHT = 1;
 GLint ANTI_ALIASING = 1;
 GLint LABEL = 1;
 
 map <string, GLuint> texture_map;
+map <int, GLuint> tetronimo_texture_map;
 // textures
 // GLuint red_block_texture;
 // GLuint orange_block_texture
@@ -819,7 +826,11 @@ class Cube
     GLint texture_name;
 
     Cube()
-    {}
+    {
+        _x = 0;
+        _y = 0;
+        _z = 0;
+    }
 
     Cube(GLint texture, double x, double y, double z)
     {
@@ -861,7 +872,7 @@ class Cube
 
     void generate()
     {
-   
+        glPushMatrix();
         glTranslatef(_x , _y, _z);
         enable_texture();
         for(int i = 0; i < 72; i += 12)
@@ -1044,6 +1055,45 @@ class GameBoi
         }
 };
 
+void compile_game()
+{
+    double pos_x = -0.02;
+    double pos_y = 0.085;
+    double pos_z = 0.005;
+
+    elapsedTime = std::chrono::duration<double>(std::chrono::steady_clock::now() - startTime).count();
+
+    if(elapsedTime > 1)
+    {
+        oglt.nextState(elapsedTime, startTime);
+        game_time_counter++;
+        cout << oglt << "\n\n";
+    }
+
+    vector<Cube> gl;
+    for(int i = 0; i < oglt.currentPlayfield().getHeight(); i++)
+    {
+        for(int j = 0; j < oglt.currentPlayfield().getWidth(); j++)
+        {
+            // cout << oglt.currentPlayfield().view(i, j) << "\n";
+            if(oglt.currentPlayfield().view(i, j) > 0)
+            {
+                Cube o1(tetronimo_texture_map[oglt.currentPlayfield().view(i, j)], pos_x, pos_y, pos_z);
+                gl.push_back(o1);
+            }
+            pos_x += SIDE;
+        }
+        pos_y -= SIDE;
+        pos_x = -0.02;
+    }
+
+    for(auto i = gl.begin(); i!= gl.end(); ++i)
+    {
+        (*i).generate();
+    }   
+
+}
+
 void display(void)
 {
     if(QUADS == 2)
@@ -1106,16 +1156,22 @@ void display(void)
     glRotatef(spinY, 0.0, 1.0, 0.0);
     glScalef(500.0, 500.0, 500.0);
     glTranslatef(0.0, 0.0, 0.0);
-    double z = 2.5;
+    // double z = 2.5;
+
+    // load class tetris or w/e
 
     
     // cout << sizeof(gameboy_point_map)/sizeof(gameboy_point_map[0]);
     // glColor3f(1.0, 0, 0);
     GameBoi gb(-0.028, -0.064, 0.012, 0.046, -0.04, 0.025, -0.06, 0.007, 0.01, 0.005);
     gb.generate();
-    Cube o1(texture_map["red_block"], 0, -0.01, 0.00);
-    o1.generate();
 
+    compile_game();
+
+    // Cube o1(texture_map["red_block"], 0, -0.01, 0.00);
+    // o1.generate();
+    
+    // gl.clear();
     glPushMatrix();
     
     glTranslatef(27.5, 35.0, 0.0);
@@ -1355,8 +1411,21 @@ void init(void)
 int main(int argc, char ** argv)
 {
 
-    OpenGLTetris oglt;
-    oglt.gameloop();
+    oglt.nextState(elapsedTime, startTime);
+    // cout << oglt.currentPlayfield() << "\n";
+    // while(elapsedTime <= game_time_counter)
+    // {
+    //     elapsedTime = std::chrono::duration<double>(std::chrono::steady_clock::now() - startTime).count();
+    // }
+    // oglt.nextState(elapsedTime, startTime);
+    // game_time_counter++;
+    // while(elapsedTime <= game_time_counter)
+    // {
+    //     elapsedTime = std::chrono::duration<double>(std::chrono::steady_clock::now() - startTime).count();
+    // }
+    // oglt.nextState(elapsedTime, startTime);
+    // cout << oglt.currentPlayfield() << "\n";
+
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
@@ -1375,12 +1444,13 @@ int main(int argc, char ** argv)
     glutSpecialUpFunc(keyboardSpecialUpHandler);
 
     // load textures
-    texture_map.insert(pair<string, GLuint>("red_block", initTexture("textures/red_block.jpg")));
-    texture_map.insert(pair<string, GLuint>("orange_block", initTexture("textures/orange_block.jpg")));
-    texture_map.insert(pair<string, GLuint>("blue_block", initTexture("textures/blue_block.jpg")));
-    texture_map.insert(pair<string, GLuint>("green_block", initTexture("textures/green_block.jpg")));
-    texture_map.insert(pair<string, GLuint>("purple_block", initTexture("textures/purple_block.jpg")));
-    texture_map.insert(pair<string, GLuint>("pink_block", initTexture("textures/pink_block.jpg")));
+    tetronimo_texture_map.insert(pair<int, GLuint>(1, initTexture("textures/red_block.jpg")));
+    tetronimo_texture_map.insert(pair<int, GLuint>(2, initTexture("textures/orange_block.jpg")));
+    tetronimo_texture_map.insert(pair<int, GLuint>(3, initTexture("textures/blue_block.jpg")));
+    tetronimo_texture_map.insert(pair<int, GLuint>(4, initTexture("textures/green_block.jpg")));
+    tetronimo_texture_map.insert(pair<int, GLuint>(5, initTexture("textures/purple_block.jpg")));
+    tetronimo_texture_map.insert(pair<int, GLuint>(6, initTexture("textures/pink_block.jpg")));
+    tetronimo_texture_map.insert(pair<int, GLuint>(7, initTexture("textures/pink_block.jpg")));
     texture_map.insert(pair<string, GLuint>("a_btn", initTexture("textures/a_btn.png")));
     texture_map.insert(pair<string, GLuint>("b_btn", initTexture("textures/b_btn.png")));
     texture_map.insert(pair<string, GLuint>("gb_back", initTexture("textures/back_gb.png")));
