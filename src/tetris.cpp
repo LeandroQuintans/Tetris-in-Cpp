@@ -157,7 +157,7 @@ namespace tetris {
 
     void Tetris::nextStateExtra(double elapsedTime, bool keyHit) {}
 
-    bool Tetris::nextState(double elapsedTime, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long long int, std::ratio<1, 1000000000>>>& startTime) {
+    bool Tetris::nextState(double elapsedTime, std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds>& startTime) {
         bool keyHit = false;
         if (canPieceBePlaced(m_currentPiece, m_piecePosition)) {
             if (elapsedTime >= m_stepTime) {
