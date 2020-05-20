@@ -1,7 +1,6 @@
 #ifndef TESTTETRIS_H
 #define TESTTETRIS_H
 
-#include <conio.h>
 #include <iostream>
 
 #include "tetris.h"
