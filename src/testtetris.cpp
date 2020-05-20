@@ -5,28 +5,30 @@ TestTetris::TestTetris(): Tetris() {
 }
 
 bool TestTetris::keystrokes() {
-    if (kbhit()) {
-        int key = getch();
-        if (key == 105) {
-            rotatePieceClockwise();
-        }
-        else if (key == 106) {
-            movePieceLeft();
-        }
-        else if (key == 107) {
-            placeWhenDownMovement();
-        }
-        else if(key == 108) {
-            movePieceRight();
-        }
-        else if(key == 122) {
-            rotatePieceCounterClockwise();
-        }
-        else if(key == 32) {
-            hardDropPiece();
-        }
-        return true;
-    }
+    // if (kbhit()) {
+    //     int key = getch();
+    //     if (key == 105) {
+    //         rotatePieceClockwise();
+    //     }
+    //     else if (key == 106) {
+    //         movePieceLeft();
+    //     }
+    //     else if (key == 107) {
+    //         enableSoftDropPiece();
+    //     }
+    //     // else if (key ==) {
+    //     // }
+    //     else if(key == 108) {
+    //         movePieceRight();
+    //     }
+    //     else if(key == 122) {
+    //         rotatePieceCounterClockwise();
+    //     }
+    //     else if(key == 32) {
+    //         hardDropPiece();
+    //     }
+    //     return true;
+    // }
     return false;
 }
 
