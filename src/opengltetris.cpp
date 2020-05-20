@@ -34,7 +34,7 @@ bool OpenGLTetris::keystrokes() {
 }
 
 void OpenGLTetris::nextStateExtra(double elapsedTime, bool keyHit) {
-    if (elapsedTime >= m_stepTime) {
+    if (elapsedTime >= m_stepTimeUsed) {
         std::cout << Tetris::currentPlayfield() << '\n';
     }
     if (keyHit) {

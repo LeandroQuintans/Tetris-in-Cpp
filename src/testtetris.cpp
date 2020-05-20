@@ -5,7 +5,7 @@ TestTetris::TestTetris(): Tetris() {
 }
 
 bool TestTetris::keystrokes() {
-    if (kbhit()) {
+    // if (kbhit()) {
     //     int key = getch();
     //     if (key == 105) {
     //         rotatePieceClockwise();
