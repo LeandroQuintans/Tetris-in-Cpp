@@ -11,7 +11,8 @@ class TestTetris: public tetris::Tetris {
 public:
     TestTetris();
 
-    virtual void extraGameloop(double deltaTime) override final;
+    virtual bool keystrokes() override final;
+    virtual void extraGameloop(double deltaTime, bool keyHit) override final;
 };
 
 #endif
