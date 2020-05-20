@@ -1267,11 +1267,12 @@ void keyboardHandler(unsigned char key, int x, int y) {
             break;
 
         case 'a':
-            allSpinsSpeedUp();
+            // allSpinsSpeedUp();
             break;
 
         case 'z':
-            allSpinsSpeedDown();
+            oglt.m_currentMove = OpenGLTetris::Move::ROTATE_COUNTER_CLOCK;
+            // allSpinsSpeedDown();
             break;
 
         case 'r':
@@ -1332,16 +1333,20 @@ void keyboardSpecialHandler(int key, int x, int y) {
 
           // Movement Keys
         case GLUT_KEY_UP:
-            spinningX = -1;
+            // spinningX = -1;
+            oglt.m_currentMove = OpenGLTetris::Move::ROTATE_CLOCK;
             break;
         case GLUT_KEY_DOWN:
-            spinningX = 1;
+            oglt.m_currentMove = OpenGLTetris::Move::DISABLE_SOFT_DROP;
+            // spinningX = 1;
             break;
         case GLUT_KEY_LEFT:
-            spinningY = -1;
+            // spinningY = -1;
+            oglt.m_currentMove = OpenGLTetris::Move::MOVE_LEFT;
             break;
         case GLUT_KEY_RIGHT:
-            spinningY = 1;
+            // spinningY = 1;
+            oglt.m_currentMove = OpenGLTetris::Move::MOVE_RIGHT;
             break;
     }
     display();
@@ -1349,18 +1354,19 @@ void keyboardSpecialHandler(int key, int x, int y) {
 
 void keyboardSpecialUpHandler(int key, int x, int y) {
     switch (key) {
-        case GLUT_KEY_UP:
-            spinningX = 0;
-            break;
+        // case GLUT_KEY_UP:
+        //     spinningX = 0;
+        //     break;
         case GLUT_KEY_DOWN:
-            spinningX = 0;
+            // spinningX = 0;
+            oglt.m_currentMove = OpenGLTetris::Move::DISABLE_SOFT_DROP;
             break;
-        case GLUT_KEY_LEFT:
-            spinningY = 0;
-            break;
-        case GLUT_KEY_RIGHT:
-            spinningY = 0;
-            break;
+        // case GLUT_KEY_LEFT:
+        //     spinningY = 0;
+        //     break;
+        // case GLUT_KEY_RIGHT:
+        //     spinningY = 0;
+        //     break;
     }
 }
 
