@@ -27,9 +27,6 @@ bool TestTetris::keystrokes() {
         }
         else if(key == 32) {
             hardDropPiece();
-            placePieceInField(m_currentPiece, m_piecePosition);
-            clearLines();
-            nextPiece();
         }
         return true;
     }
@@ -37,7 +34,7 @@ bool TestTetris::keystrokes() {
 }
 
 void TestTetris::nextStateExtra(double elapsedTime, bool keyHit) {
-    if (elapsedTime >= m_stepTime) {
+    if (elapsedTime >= m_stepTimeUsed) {
         std::cout << Tetris::currentPlayfield() << '\n';
     }
     if (keyHit) {
