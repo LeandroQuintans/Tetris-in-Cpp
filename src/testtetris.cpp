@@ -36,8 +36,8 @@ bool TestTetris::keystrokes() {
     return false;
 }
 
-void TestTetris::extraGameloop(double deltaTime, bool keyHit) {
-    if (deltaTime >= m_stepTime) {
+void TestTetris::nextStateExtra(double elapsedTime, bool keyHit) {
+    if (elapsedTime >= m_stepTime) {
         std::cout << Tetris::currentPlayfield() << '\n';
     }
     if (keyHit) {
