@@ -8,6 +8,7 @@
 #include "testtetris.h"
 #include "opengltetris.h"
 #include <GL/glut.h>  // GLUT, includes glu.h and gl.h
+#include <GL/glext.h> // Needed for GL_MULTISAMPLE
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
