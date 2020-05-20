@@ -1,6 +1,11 @@
 CXX=g++
 CXXFLAGS=-Wall -std=c++17
-LIBFLAGS=-lGL -lGLU -lSOIL  -lglut -lm 
+
+ifeq ($(OS),Windows_NT)
+	LIBFLAGS:=-lglu32 -lSOIL -lopengl32 -lfreeglut
+else
+	LIBFLAGS:=-lGL -lGLU -lSOIL -lglut -lm
+endif
 
 SRCDIR=src
 UTESTDIR=src/tests
