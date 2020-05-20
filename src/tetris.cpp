@@ -138,7 +138,6 @@ namespace tetris {
                 else {
                     result.at(i, j) = m_playfield.view(i, j);
                 }
-                // if (m_piecePosition.second > m_playfield.getWidth()) std::cout << "yay" << '\n';    
             }
         }
 
