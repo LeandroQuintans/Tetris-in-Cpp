@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-Wall -std=c++17
+CXXFLAGS=-Wall -std=c++17 -lGL -lGLU -lSOIL  -lglut -lm 
 # LIBFLAGS=-lm -pthread -fopenmp
 
 SRCDIR=src
@@ -8,10 +8,10 @@ OBJDIR=obj
 BINDIR=bin
 
 
-_DEPS=matrix.h piece.h tetris.h testtetris.h
+_DEPS=matrix.h piece.h tetris.h testtetris.h opengltetris.h
 DEPS=$(patsubst %,$(SRCDIR)/%,$(_DEPS))
 
-_OBJ=main.o piece.o tetris.o testtetris.o
+_OBJ=main.o piece.o tetris.o testtetris.o opengltetris.o
 OBJ=$(patsubst %,$(OBJDIR)/%,$(_OBJ))
 
 _OBJ_UNITTEST=matrix_unittests.o
@@ -21,7 +21,7 @@ OBJ_UNITTEST=$(patsubst %,$(OBJDIR)/%,$(_OBJ_UNITTEST))
 all: main
 
 main: $(OBJ)
-	$(CXX) -o $(BINDIR)/main.exe $^ $(CXXFLAGS)
+	$(CXX) -o $(BINDIR)/main.out $^ $(CXXFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
 	$(CXX) -c $< -o $@ $(CXXFLAGS) -I $(SRCDIR)
