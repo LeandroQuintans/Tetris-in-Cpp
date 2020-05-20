@@ -2,9 +2,9 @@ CXX=g++
 CXXFLAGS=-Wall -std=c++17
 
 ifeq ($(OS),Windows_NT)
-	LIBFLAGS:=-lglu32 -lSOIL -lopengl32 -lfreeglut -lm
+	LIBFLAGS:=-lSOIL -lglu32 -lopengl32 -lfreeglut -lm
 else
-	LIBFLAGS:=-lGL -lGLU -lSOIL -lglut -lm
+	LIBFLAGS:=-lSOIL -lGL -lGLU -lglut -lm
 endif
 
 SRCDIR=src
