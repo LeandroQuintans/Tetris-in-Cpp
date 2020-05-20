@@ -33,7 +33,7 @@ bool TestTetris::keystrokes() {
     //     }
     //     return true;
     // }
-    // return false;
+    return false;
 }
 
 void TestTetris::nextStateExtra(double elapsedTime, bool keyHit) {
