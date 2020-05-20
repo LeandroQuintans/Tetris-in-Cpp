@@ -155,28 +155,51 @@ namespace tetris {
 
     // void Tetris::keystrokes() {}
 
+    void Tetris::nextStateExtra(double elapsedTime, bool keyHit) {}
+
+    bool Tetris::nextState(double elapsedTime, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long long int, std::ratio<1, 1000000000>>>& startTime) {
+        bool keyHit = false;
+        if (canPieceBePlaced(m_currentPiece, m_piecePosition)) {
+            if (elapsedTime >= m_stepTime) {
+                if (!movePieceDown()) {
+                    placePieceInField(m_currentPiece, m_piecePosition);
+                    clearLines();
+                    nextPiece();
+                }
+                startTime = std::chrono::steady_clock::now();
+            }
+            keyHit = keystrokes();
+        }
+        else {
+            return false;
+        }
+        nextStateExtra(elapsedTime, keyHit);
+        return true;
+    }
+
     void Tetris::gameloop() {
         bool game = true;
         auto startTime(std::chrono::steady_clock::now());
-        bool keyHit = false;
+        // bool keyHit = false;
         while(game) {
             double elapsedTime = std::chrono::duration<double>(std::chrono::steady_clock::now() - startTime).count();
-            if (canPieceBePlaced(m_currentPiece, m_piecePosition)) {
-                if (elapsedTime >= m_stepTime) {
-                    if (!movePieceDown()) {
-                        placePieceInField(m_currentPiece, m_piecePosition);
-                        clearLines();
-                        nextPiece();
-                    }
-                    startTime = std::chrono::steady_clock::now();
-                }
-                keyHit = keystrokes();
-            }
-            else {
-                game = false;
-            }
-            extraGameloop(elapsedTime, keyHit);
-            keyHit = false;
+            // if (canPieceBePlaced(m_currentPiece, m_piecePosition)) {
+            //     if (elapsedTime >= m_stepTime) {
+            //         if (!movePieceDown()) {
+            //             placePieceInField(m_currentPiece, m_piecePosition);
+            //             clearLines();
+            //             nextPiece();
+            //         }
+            //         startTime = std::chrono::steady_clock::now();
+            //     }
+            //     keyHit = keystrokes();
+            // }
+            // else {
+            //     game = false;
+            // }
+            game = nextState(elapsedTime, startTime);
+            // extraGameloop(elapsedTime, keyHit);
+            // keyHit = false;
         }
     }
 
