@@ -14,11 +14,8 @@ bool TestTetris::keystrokes() {
             movePieceLeft();
         }
         else if (key == 107) {
-            enableSoftDropPiece();
+            placeWhenDownMovement();
         }
-        // else if (key ==) {
-            
-        // }
         else if(key == 108) {
             movePieceRight();
         }
@@ -34,7 +31,7 @@ bool TestTetris::keystrokes() {
 }
 
 void TestTetris::nextStateExtra(double elapsedTime, bool keyHit) {
-    if (elapsedTime >= m_stepTimeUsed) {
+    if (elapsedTime >= m_stepTime) {
         std::cout << Tetris::currentPlayfield() << '\n';
     }
     if (keyHit) {

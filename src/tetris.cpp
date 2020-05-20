@@ -68,7 +68,6 @@ namespace tetris {
             for (std::size_t j = 0; j < m_playfield.getWidth(); ++j) {
                 if (!m_playfield.view(i, j)) {
                     clear = false;
-                    ++m_linesCleared;
                     break;
                 }
             }
@@ -78,6 +77,7 @@ namespace tetris {
                         m_playfield.at(i2, j2) = m_playfield.at(i2-1, j2);
                     }
                 }
+                ++m_linesCleared;
             }
             clear = true;
         }
@@ -95,6 +95,14 @@ namespace tetris {
         return movePiece(1, 0);
     }
 
+    void Tetris::placeWhenDownMovement() {
+        if (!movePieceDown()) {
+            placePieceInField(m_currentPiece, m_piecePosition);
+            clearLines();
+            nextPiece();
+        }
+    }
+
     void Tetris::rotatePieceClockwise() {
         do {
             m_currentPiece.rotateClockwise();
@@ -105,14 +113,6 @@ namespace tetris {
         do {
             m_currentPiece.rotateCounterClockwise();
         } while (!canPieceBePlaced(m_currentPiece, m_piecePosition));
-    }
-
-    void Tetris::enableSoftDropPiece() {
-        m_stepTimeUsed = m_stepTimeRef /= 10.0;
-    }
-
-    void Tetris::disableSoftDropPiece() {
-        m_stepTimeUsed = m_stepTimeRef *= 10.0;
     }
 
     void Tetris::hardDropPiece() {
@@ -149,11 +149,11 @@ namespace tetris {
 
 
     int Tetris::level() {
-        return m_linesCleared % 10 + 1 > 20 ? 20 : m_linesCleared % 10 + 1;
+        return m_linesCleared / 10 + 1 > 20 ? 20 : m_linesCleared / 10 + 1;
     }
 
     void Tetris::updateStepTime() {
-        m_stepTimeRef = pow(0.8 - ((level() - 1)*0.007), level() - 1);
+        m_stepTime = pow(0.8 - ((level() - 1)*0.007), level() - 1);
     }
 
     // void Tetris::keystrokes() {}
@@ -163,15 +163,13 @@ namespace tetris {
     bool Tetris::nextState(double elapsedTime, std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds>& startTime) {
         bool keyHit = false;
         if (canPieceBePlaced(m_currentPiece, m_piecePosition)) {
-            if (elapsedTime >= m_stepTimeUsed) {
-                if (!movePieceDown()) {
-                    placePieceInField(m_currentPiece, m_piecePosition);
-                    clearLines();
-                    nextPiece();
-                }
+            if (elapsedTime >= m_stepTime) {
+                placeWhenDownMovement();
                 startTime = std::chrono::steady_clock::now();
             }
             keyHit = keystrokes();
+
+            updateStepTime();
         }
         else {
             return false;
